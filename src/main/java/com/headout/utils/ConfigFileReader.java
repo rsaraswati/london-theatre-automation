@@ -18,8 +18,6 @@ public class ConfigFileReader {
 			properties = new Properties();
 			try {
 				properties.load(reader);
-//				reader.close();
-//				System.out.println(properties.getProperty("searchBox"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -30,7 +28,6 @@ public class ConfigFileReader {
 	
 	public String getSearchBox() {
 		String searchBox = properties.getProperty("searchBox");
-//		System.out.println(properties.getProperty("searchBox"));
 		if(searchBox != null) 
 			return searchBox;
 		else throw new RuntimeException("Search Box not found !");	

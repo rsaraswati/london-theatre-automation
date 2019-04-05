@@ -2,11 +2,17 @@ package com.headout.pages;
 
 import org.testng.annotations.Test;
 
-public class SearchShow {
+import com.headout.base.BaseTest;
+import com.headout.utils.ConfigFileReader;
+
+public class SearchShow extends BaseTest{
 	
 	@Test
 	public void searchShow() {
 		HomePage home = new HomePage();
-		home.searchForShowAndBook("The Simon and Garfunkel Story ");
+		
+		ConfigFileReader reader = new ConfigFileReader();
+		String showName = reader.getShowName();
+		home.searchForShowAndBook(showName);
 	}
 }
