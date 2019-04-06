@@ -40,10 +40,10 @@ public class ConfigFileReader {
 		else throw new RuntimeException("Show not available !");		
 	}
 	
-	public String bookShow() {
-		String bookButton = properties.getProperty("bookButton");
-		if(bookButton != null) 
-			return bookButton;
-		else throw new RuntimeException("Sorry, can't book !");		
+	public String getDate() {
+		String date = properties.getProperty("dateName");
+		if(date != null) 
+			return date;
+		else throw new RuntimeException("Date not available !");	
 	}
 }

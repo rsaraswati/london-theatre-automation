@@ -19,6 +19,7 @@ public class BaseClass {
 		driver.get(APP_URL);
 		homePage = new HomePage();
 		homePage.setDriver(driver);
+		driver.manage().deleteAllCookies();
 	}
 
 	private static void setChromeDriverProperty() {
