@@ -41,9 +41,16 @@ public class ConfigFileReader {
 	}
 	
 	public String getDate() {
-		String date = properties.getProperty("dateName");
+		String date = properties.getProperty("date");
 		if(date != null) 
 			return date;
 		else throw new RuntimeException("Date not available !");	
+	}
+
+	public String getMonthAndYear() {
+		String monthAndYear = properties.getProperty("monthYear");
+		if(monthAndYear != null) 
+			return monthAndYear;
+		else throw new RuntimeException("Month not available !");
 	}
 }
