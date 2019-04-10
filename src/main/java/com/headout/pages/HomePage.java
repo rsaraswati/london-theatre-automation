@@ -7,70 +7,41 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.headout.utils.ConfigFileReader;
+import com.headout.utils.TimeOuts;
 
 public class HomePage {
-
+	TimeOuts timeOut = new TimeOuts();
+	
 	public static WebDriver driver;
 	ConfigFileReader reader = new ConfigFileReader();
-	private String url;
-	Set<String> beforePopup;
-	Set<String> afterPopup;
-	
+	public static String url;
+
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
 	}
-	public HomePage() {
-		
-	}
+
 	public void searchForShowAndBook(String showName) {
 
 		WebElement searchBox = driver.findElement(By.xpath(reader.getSearchBox()));
 
 		searchBox.sendKeys(showName + Keys.ENTER);
 
-		WebDriverWait wait = new WebDriverWait(driver, 10);
-
-//		Helper helper = new Helper();
-//		helper.checkVisibilityOfLocatedElement(reader.bookShow());
-//		WebElement element = wait.until(
-//		        ExpectedConditions.visibilityOfElementLocated(driver.findElement(By.linkText(reader.bookShow()))));
-//		WebElement element = driver.findElement(By.cssSelector(reader.bookShow()));
-//		element.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e1) {
-			System.out.println("Time out " + e1.getMessage());
-			e1.printStackTrace();
-		}
-		beforePopup = driver.getWindowHandles(); 
+		timeOut.sleep();
+		
+		Set<String> beforePopup = driver.getWindowHandles();
+		
 		WebElement book = driver.findElement(By.partialLinkText("BOOK NOW"));
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		book.click();
-		afterPopup = driver.getWindowHandles(); 
+		
+		Set<String> afterPopup = driver.getWindowHandles();
 		afterPopup.removeAll(beforePopup);
-		if(afterPopup.size() == 1) 
-		{ 
-		        driver.switchTo().window((String)afterPopup.toArray()[0]); 
-		        url = driver.getCurrentUrl();
+		if (afterPopup.size() == 1) {
+			driver.switchTo().window((String) afterPopup.toArray()[0]);
 		}
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e1) {
-			System.out.println("Time out " + e1.getMessage());
-			e1.printStackTrace();
-		}
+		url = driver.getCurrentUrl();
 
-	}
-
-	public String getCurrentUrl() {
-		return url;
-	}
-
-	public void setDriver(WebDriver driver) {
-
-		HomePage.driver = driver;
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 }
